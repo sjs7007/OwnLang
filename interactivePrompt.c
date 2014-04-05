@@ -1,5 +1,10 @@
 #include<stdio.h>
 
+//for ability to move cursor : http://www.buildyourownlisp.com/chapter4_interactive_prompt
+//sudo apt-get install libedit-dev`
+#include <editline/readline.h>
+#include <editline/history.h>
+
 //static buffer for user input of size 2048
 static char input[2048];
 
@@ -10,12 +15,17 @@ int main()
 
 	while(1)
 	{
-		fputs("lispy> ",stdout); //no new line at end. variation of puts
+		//Output prompt and get input
+		char* input = readline("lispy> ");
 
-		//read a line of user input of max size 2048
-		fgets(input,2048,stdin);
+		//add input to history
+		add_history(input); //will allow history to be accessed using up/down arrows
 
 		//echo input back to user
-		printf("Input is : %s",input);
+		printf("Input is : %s\n",input);
+
+		//free retrieved input
+		free(input);
+		/*becayse unlike fgets, which writes to some existing buffer, readline allocates nw memory when called each time.*/
 	}
 }
