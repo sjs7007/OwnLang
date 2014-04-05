@@ -23,7 +23,7 @@ int main()
 
 		//echo input back to user
 		printf("Input is : %s\n",input);
-
+		/*Unlike fgets, the readline function strips the trailing newline character from the input, so we need to add this to our printf function.*/
 		//free retrieved input
 		free(input);
 		/*becayse unlike fgets, which writes to some existing buffer, readline allocates nw memory when called each time.*/
